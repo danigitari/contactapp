@@ -1,0 +1,44 @@
+.content
+{
+ width: 300px;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50% , -50% );
+ margin:  30px 0;
+ 
+}
+
+input
+{
+    padding: 30px;
+    height:  17px; 
+    width: 100%;
+    border: none;
+    border-bottom: 3px solid #adadad ; 
+}
+ 
+button
+{
+    height: 50px;
+    width: 80px;
+    font-size: 15px;
+    border-radius: 3px;
+    
+    background-color: rgb(62, 153, 130);
+
+}
+a{
+    /* float: right; */
+    font-size: 30px;
+    padding: 3px;
+}
+
+body
+{
+     background-color: #7eb1d9;
+}
+.err_username
+{
+    color: rgb(253, 0, 0);
+}
