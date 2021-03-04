@@ -38,21 +38,21 @@
           
               <!-- Icon -->
               <div class="fadeIn first">
-              </div>
+              
           
               <!-- Login Form -->
               <form action="{{route ('login') }}" class="" method="post">
                 @csrf
-                <label for="username"> <pre><h2>username</h2></pre> </label>
+                <label for="username"> <h4>username</h4> </label>
                 <input type="text" id="username" class="fadeIn second" name="username" placeholder="username">
-                <label for="password"> <pre><h2> password</h2></pre> </label><br>
+                <label for="password"> <h4> password</h4></label><br>
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
                 <br>
                 
                 <input type="submit" class="fadeIn fourth" value="Login">
                 {{-- <button class="btn btn-success" type="submit" name="button" value="submit">login</button> --}}
               </form>
-          
+            </div>
              
               <div id="formFooter">
                 <a class="underlineHover" href="{{ route('register') }}">register</a><br>

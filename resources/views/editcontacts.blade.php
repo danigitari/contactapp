@@ -18,26 +18,33 @@
     <br><br>
        <div class="container">
           <h1> EDIT CONTACT</h1><br>
-           <form action="/update/{{ $DashBoard->id }}" method="PUT">
+          @if(Session::has('contact_updated'))
+          <div class="alert alert-success" role="alert">
+            {{ Session::get('contact_updated')}}
+          </div>
+          @endif
+           <form action="/update/{{$change ->id }}" method="POST" enctype="multipart/form-data">
                @csrf
+               <input type="hidden" name="id" id="id" value="{{ $change->id }}">
+
                <div class="form-group">
                    <label for="fullname" >Fullname</label>
-                   <input type="text" name="fullname"class="form-control" placeholder="enter fullname">
+                   <input type="text" name="fullname"class="form-control"  value="{{ $change->fullname }}">
                </div>
                <div class="form-group">
                    <label for="phonenumbers">Phonenumbers</label>
-                   <input type="text" name="phonenumbers"class="form-control"placeholder="enter phonenumbers">
+                   <input type="text" name="phonenumbers"class="form-control" value="{{ $change->phonenumbers }}">
                </div>
                <div class="form-group">
                 <label for="email" >Email</label>
-                <input type="email" name="email" class="form-control" placeholder="enter email">
+                <input type="email" name="email" class="form-control"  value="{{ $change->email }}">
             </div>
             <div class="form-group">
                 <label for="uploadimage ">Upload image</label>
-                <input type="file" name="image" class="form-control" placeholder="upload image">
+                <input type="file" name="file" class="form-control"  value="{{ $change->image }}">
                
             </div>
-            <button type="submit" id="uploadimage" class="btn btn-primary"> UPDATE </button></form>
+            <button type="submit" id="uploadimage" class="btn btn-info"> UPDATE </button></form>
             <br>
         
            </form>

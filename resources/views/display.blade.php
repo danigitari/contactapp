@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1> CONTACT LIST</h1><br>
+    <a href="/dashboard" class="btn btn-primary">add new contact</a>
  <div class="container">
      <div class="jumbotron">
      <table class="table table-striped table-bordered">
@@ -19,13 +20,20 @@
          <th scope="col">contactphoto</th>
          <th> EDIT </th>
      </tr></thead><tbody>
-         @foreach ($DashBoards as $DashBoard)
+        @if(Session::has('contact deleted'))
+        <div class="alert alert-danger" role="alert">
+          {{ Session::get('contact deleted')}}
+        </div>
+        @endif
+         @foreach ($contacts as $item)
          <tr>
-             <td>{{ $DashBoard->fullname }}</td>
-             <td>{{ $DashBoard->phonenumbers }}</td>
-             <td>{{ $DashBoard->email }}</td>
-             <td> <img src="{{ asset('uploads/contactphoto/' . $DashBoard->image)}}" width="100px" alt="image">  </td> --}}
-             <td><a href="/update/{{ $DashBoard->id }}" class="btn btn-sucess"> EDIT </a></td>
+             <td>{{ $item->fullname }}</td>
+             <td>{{ $item->phonenumbers }}</td>
+             <td>{{ $item->email }}</td>
+             <td> <img src="{{ asset('images/' . $item->file)}}" width="100px" alt="image">  </td> 
+             <td><a href="/edit/{{ $item->id }}" class="btn btn-success"> EDIT </a></td>
+             <td><a href="/delete/{{ $item->id }}" class="btn btn-danger"> DELETE </a></td>
+             @endforeach
          </tr>
      </tbody> 
     </table></div></div>

@@ -18,7 +18,7 @@
     <br><br>
        <div class="container">
           <h1> CREATE CONTACT</h1><br>
-           <form action="{{ route('createcontact') }}" method="post">
+           <form action="{{ route('createcontact') }}" method="post" enctype="multipart/form-data">
                @csrf
                <div class="form-group">
                    <label for="fullname" >Fullname</label>
@@ -34,7 +34,7 @@
             </div>
             <div class="form-group">
                 <label for="uploadimage ">Upload image</label>
-                <input type="file" name="image" class="form-control" placeholder="upload image">
+                <input type="file" name="file" class="form-control" placeholder="upload image">
                
             </div>
             <button type="submit" id="uploadimage" class="btn btn-primary"> save</button></form>
@@ -45,7 +45,10 @@
            <form action="/" method="get">
             @csrf
                 <button  class="btn btn-primary">home</button></form>
-       </div>
-  
+                <br>
+      
+       <form action="/display" method="get">
+       <button  class="btn btn-primary">List</button></form>
+    </div>
 </body>
 </html>

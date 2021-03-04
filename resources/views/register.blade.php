@@ -16,12 +16,13 @@
 
  
   
-      <div class="container"> 
-          <div class="row col-md-6 col-md-offset-3">
+       <div class="container">  
+          <div class="col-md-6 offset-md-3 ">
               <div class="panel panel-primary">
                   <div class="panel-heading text-center">  
                      <h1>REGISTER</h1>
                   </div>
+                  <div class="card">
                         <form action="{{route ('register') }}" class="" method="post">
             @csrf
                              <div>
@@ -34,16 +35,18 @@
                 @enderror
             </div>
             <br> 
-            <div>
+            <div >
                 <label for="name"> <pre><h2>name</h2></pre>  </label>
-                <input type="text" placeholder="name"  class="fadeIn third" id="name" name="name" value="" ></div>
+                <input type="text" placeholder="name"  class="fadeIn third" id="name" name="name" value="" >
+                </div>
+                @enderror</div>
             <br>
             
-            <div>
+            <div >
                 <label for="email"> <pre><h2>email</h2></pre>  </label>
                 <input type="email"  placeholder="email"   class="fadeIn fourth" id="email" name="email" value="" ></div>
             <br>
-            <div>
+            <div >
                 <label for="password"> <pre><h2>password</h2></pre>  </label>
                 <input type="password" placeholder="password" id="password"  class="fadeIn fifth" name="password" value="" ></div>
             <br>
@@ -55,9 +58,10 @@
             <button type="submit" name="button" value="submit">Register</button>
             <a href={{ route('get_login') }}> login </a>
         </form>
+    </div>
          </div>
        </div>
       </div> 
-    </div>
+    </div> 
 </body>
 </html>

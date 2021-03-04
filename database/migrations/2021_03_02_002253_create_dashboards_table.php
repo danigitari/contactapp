@@ -18,7 +18,7 @@ class CreateDashboardsTable extends Migration
             $table->string("fullname");
             $table->string("email");
             $table->bigInteger("phonenumbers")->unsigned();
-            $table->mediumText("image")->nullable();
+            $table->string("file")->nullable();
             $table->timestamps();
         });
     }

@@ -12,50 +12,46 @@ class DashBoardController extends Controller
     public function index()
     {
        return view('dashboard');
+    //    return redirect()->route('dashboard');
     }
 
     
-    public function create()
-    {
+    // public function create()
+    // {
         // DB::table('dashboards')->insert([
         //     'fullname'=>$request->fullname,
         //     'phonenumbers' => $request-> phonenumbers,
         //     'email' => $request-> email,
         //     'image' => $request->imagename,]); 
-    }
+    // }
 
     /*
      */
      public function store(Request $request){
-         $Dashboard = new Dashboard;
+         
+         $fullname = $request->fullname;
+         $phonenumbers = $request->phonenumbers;
+         $email = $request->email;
+         $image = $request -> file('file');
+         $extension = $image -> extension();
+         $imageName = time().'.'.$extension;
+         $image->move(public_path('images'),$imageName);
 
-        $Dashboard->fullname=$request->input('fullname');
-        $Dashboard->phonenumbers=$request->input('phonenumbers');
-        $Dashboard->email=$request->input('email');
-       
-        if($request->hasfile('image')){
-            $file=$request->file('image');
-            $extension = $file->getClientorOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/contactphotos',$filename);
-            $Dashboard->image = $filename;
-        }
-        else{
-            return $request;
-            $Dashboard->image = '';
+        $contact = new Dashboard();
+        $contact-> fullname = $fullname;
+        $contact -> phonenumbers = $phonenumbers;
+        $contact -> email = $email;
+        $contact-> file = $imageName;
+         
 
-        }
-
-        $Dashboard->save();
-
-        return back()->with('DashBoard',$DashBoard);
+        $contact -> save();
+      
+        return redirect()->route('display');
         
     }
 
     
 
-
-// 'DashBoard',$DashBoard
  
   
 //    $image=$request->file('image');
@@ -80,27 +76,46 @@ class DashBoardController extends Controller
    
 
   public function display(){
-      $DashBoard = DashBoard::all();
-    return view('display')->with('DashBoards',$DashBoard );
+      $contacts = DashBoard::all();
+      return view('display')->with('contacts',$contacts );
+    //  return view('display')->with('contacts',$contacts );
+
+
  }
   public function edit($id)
   {
-      $Dashboard = Dashboard::find($id);
-      return view('editcontacts') -> with('DashBoard', $DashBoard,);
+      $change = Dashboard::find($id);
+      return view('editcontacts')->with('change',$change);
   }
 
 
-public function update($id)
+public function update(Request $request)
 {
-    $Dashboard = Dashboard::find($id);
+    $fullname = $request->fullname;
+    $phonenumbers = $request->phonenumbers;
+    $email = $request->email;
+    $image = $request -> file('file');
+    $extension = $image -> extension();
+    $imageName = time().'.'.$extension;
+    $image->move(public_path('images'),$imageName);
 
-    if($request->hasfile('image')){
-        $file=$request->file('image');
-        $extension = $file->getClientorOriginalExtension();
-        $filename = time() . '.' . $extension;
-        $file->move('uploads/contactphotos',$filename);
-        $Dashboard->image = $filename;} 
+    $change = Dashboard::find($request->id);
+    $change->fullname = $fullname;
+    $change->phonenumbers =  $phonenumbers;
+    $change->email = $email;
+    $change->file =  $imageName;
+    $change->save();
+
+    return back()->with('contact_updated','contact info updated successfully');
+
 }
+
+  public function destroy($id){
+      $change = Dashboard::find($id);
+      unlink(public_path('images'). '/'.$change->file);
+      $change->delete();
+      return back()->with('contact deleted','contact deleted.');
+  } 
        
         
 }
