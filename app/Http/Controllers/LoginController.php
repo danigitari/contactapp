@@ -9,7 +9,7 @@ class LoginController extends Controller{
 
 
 public function index(){
-    return view('login');
+    return view('/login');
 
 }
 
@@ -23,7 +23,7 @@ public function store(Request $request){
         return back()->with('status','Invalid login details');
     }; 
 
-    return redirect()->route('dashboard');
+    return redirect()->route('display');
     //redirect()->route
 
 }

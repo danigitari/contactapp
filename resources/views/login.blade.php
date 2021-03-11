@@ -8,15 +8,15 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/login.css"> 
 
 
     </div>
     <title>Document</title>
 </head>
 <body>
- 
-    <div class="content" >
-      
+   {{--<div class="content" >
+       --}}
        
         {{-- <form action="{{route ('login') }}" class="" method="post">
           @csrf
@@ -29,8 +29,8 @@
                 <label for="password"> <pre><h2>password</h2></pre>  </label>
                 <input type="password" class="form-control" placeholder="password" id="password" name="password" value="" ></div>
             <br>
-        </div> --}}
-        <br>
+        {{-- </div> --}}
+        {{-- <br>
         <br>
         <div class="wrapper fadeInDown">
             <div id="formContent">
@@ -51,13 +51,13 @@
                 
                 <input type="submit" class="fadeIn fourth" value="Login">
                 {{-- <button class="btn btn-success" type="submit" name="button" value="submit">login</button> --}}
-              </form>
+              {{-- </form>
             </div>
              
               <div id="formFooter">
-                <a class="underlineHover" href="{{ route('register') }}">register</a><br>
+                <a class="underlineHover" href="{{ route('register') }}">register</a><br> --}}
                 {{-- <a href={{ route('register') }}> register </a> --}}
-              </div>
+              {{-- </div>
           
             </div>
           </div>
@@ -66,6 +66,33 @@
     
 
     </form>
+</div>
+</body>
+</html>   --}}
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-6">
+          <div class="card">
+              <form class="box" action="{{route ('login') }}" method="post">
+                @csrf
+                <br>
+                  <h1>Login</h1>
+                  <br>
+                  <p class="text-muted"> Please enter your login and password!</p> 
+                  
+                  <input type="text" name="username" placeholder="Username"> 
+                  
+                  <input type="password" name="password" placeholder="Password">
+                  {{-- <a class="forgot text-muted" href="#">Forgot password?</a> --}}
+                  <br>
+                  <button class="btn btn-primary " type="submit" name="button" value="submit">login</button>
+                  
+              </form>
+          </div>
+      </div>
+  </div>
 </div>
 </body>
 </html>

@@ -18,16 +18,20 @@ use App\Http\Controllers\DashBoardController;
 */
 
  Route::get('/', function () {
-     return view('home');
+     return view('/register');
  });
+
+//  Route::get('/1', function () {
+//     return view('test_register');
+// });
 
 Route::get('/register', [RegisterController::class,'index']) -> name('register');
 Route::post('/register', [RegisterController::class,'store']) -> middleware('guest');
 Route::get('/login', [LoginController::class,'index'])-> name('get_login');
-Route::post('/login', [LoginController::class,'store'])->middleware('guest') -> name('login');
+Route::post('/login', [LoginController::class,'store']) -> name('login');
 Route::post('/logout', [LogoutController::class,'store']) -> name('logout'); 
 Route::get('/dashboard',[DashBoardController::class,'index']) -> name('dashboard') -> middleware('auth');
-Route::post('/dashboard', [DashBoardController::class,'store']) -> middleware('auth') -> name('createcontact') ;
+Route::post('/dashboard',[DashBoardController::class,'store'])-> middleware('auth') -> name('createcontact');
 Route::get('/display', [DashBoardController::class,'display']) -> name('display');
 // Route::get('/update/{{ $item->id }}',[DashBoardController::class,'index']);
 Route::get('/register', [RegisterController::class,'index']) -> name('register');
@@ -35,3 +39,7 @@ Route::post('/register', [RegisterController::class,'store']) -> middleware('gue
 Route::get('/edit/{id}',[DashBoardController::class,'edit']);
 Route::post('/update/{id}',[DashBoardController::class,'update'])-> name('editcontacts');
 Route::get('/delete/{id}',[DashBoardController::class,'destroy']);
+// Route::get('/test_register', [RegisterController::class,'index']);
+// Route::get('/test_register', [RegisterController::class,'store']) -> name('test_register');
+// Route::get('/login', [LoginController::class,'index'])-> name('get_newlogin');
+// Route::post('/login', [LoginController::class,'store'])->middleware('guest') -> name('new_login');

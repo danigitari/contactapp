@@ -77,7 +77,7 @@ class DashBoardController extends Controller
 
   public function display(){
       $contacts = DashBoard::all();
-      return view('display')->with('contacts',$contacts );
+      return view('display')->with('contacts',$contacts);
     //  return view('display')->with('contacts',$contacts );
 
 
@@ -89,7 +89,7 @@ class DashBoardController extends Controller
   }
 
 
-public function update(Request $request)
+public function update(Request $request , $id)
 {
     $fullname = $request->fullname;
     $phonenumbers = $request->phonenumbers;
@@ -99,7 +99,7 @@ public function update(Request $request)
     $imageName = time().'.'.$extension;
     $image->move(public_path('images'),$imageName);
 
-    $change = Dashboard::find($request->id);
+    $change = Dashboard::find($id);
     $change->fullname = $fullname;
     $change->phonenumbers =  $phonenumbers;
     $change->email = $email;
@@ -114,8 +114,56 @@ public function update(Request $request)
       $change = Dashboard::find($id);
       unlink(public_path('images'). '/'.$change->file);
       $change->delete();
-      return back()->with('contact deleted','contact deleted.');
-  } 
-       
+      return back()->with('contact deleted','contact deleted.');}
+      
+  public function delete($id){
+    $change = Dashboard::find($id);
+    unlink(public_path('images'). '/'.$change->file);
+    $change->delete();
+    return "deleted successfully";}
+
+  public function list(){
+      return Dashboard::all();
+  }
+
+  
+  public function listid($id){
+    return Dashboard::find($id);
+}
+  public function upload(Request $request){
+
+      $upload=$request->file('image') -> store('images');
+      $upload=$request->fullname;
+      $upload=$request->phonenumbers;
+      $upload=$request->email;
+      return ["upload"->$upload];
+  }
+
+//     public function add(Request $request){
+//         $contact = new Dashboard();
+//         $contact-> fullname =  $request->input("fullname");
+//         $contact -> phonenumbers =$request->input("phonenumbers");
+//         $contact -> email = $request->input("email");
+//         $contact-> file = $request->file('file');
+//         $contact -> save();
+//         return $contact;
+    // }
+  
+    public function updatecontact(Request $request, $id)
+    {
+
+        $contact = DashBoard::findOrFail($id);
+        $contact->fullname = $request->fullname;
+        $contact->phonenumbers = $request->phonenumbers;
+        $contact->email = $request->email;
+        $ImageName='profile';
+        $image = $request->file('file');
+        $ImageName = time().'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(200, 160)->save(base_path('public/uploads/images/contacts/') . $ImageName); 
+        $contact->file = 'images/'.$ImageName;
+        $contact->save();
+
+            return response()->json(['data' => $contact, 'code' => Response::HTTP_CREATED]);
+    } 
         
 }
